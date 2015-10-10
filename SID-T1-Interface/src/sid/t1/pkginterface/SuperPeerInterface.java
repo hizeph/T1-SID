@@ -32,5 +32,5 @@ public interface SuperPeerInterface extends Remote {
     * @param source Client who wants to send a message
     * @throws java.rmi.RemoteException
     */
-    public void sendMesssagePeer(String client, String message, String source) throws RemoteException;
+    public void sendMessagePeer(String client, String message, String source) throws RemoteException;
 }
