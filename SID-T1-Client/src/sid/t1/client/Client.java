@@ -1,5 +1,16 @@
 package sid.t1.client;
 
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/*
+Definição número das portas
+3000 = Interna peers
+20xx = PeerX para clientes
+21xx = Client registry
+*/
+
 public class Client extends javax.swing.JFrame {
     
     Control control;
@@ -9,7 +20,12 @@ public class Client extends javax.swing.JFrame {
      */
     public Client() {
         initComponents();
-        control = new Control();
+        try {
+            control = new Control();
+            control.init();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -65,7 +81,7 @@ public class Client extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        control.start();
+       control.sendMessage();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
