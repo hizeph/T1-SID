@@ -14,14 +14,13 @@ import sid.t1.pkginterface.SuperPeerInterface;
 public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface {
     
     Server userInterface;
-<<<<<<< HEAD
+
     static int offset = 0; // PeerNumber
     static int clientsPort; // Port to lookup for clients
-=======
-    ArrayList<ClientInterface> clientList;
+
     int offset = 0; // PeerNumber
     int clientsPort; // Port to lookup for clients
->>>>>>> origin/master
+
     String peerOnlyURL; // URL to lookup for other peers
     
     /**
@@ -33,12 +32,12 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
     @Override
     public void sendMessageClient(String client, String message, String source) throws RemoteException {
         userInterface.println("[ENVIANDO] " + source + " -> " + client + ": " + message );
-<<<<<<< HEAD
+
         System.out.println(getClientsPort());
         try {
             //Supostamente corrigido, se o offset não bugar também
             ClientInterface ci = (ClientInterface) Naming.lookup("//localhost:" + getClientsPort() + "/" + client);
-=======
+
         try {
             /**
              * [BASTOS] Fiquei horas tentando descobrir pq clientsPort entra como 0 aqui, mas não consegui :(
@@ -47,7 +46,6 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
              * Se atribuir um valor pra ele no construtor ele recebe, mas nada do 2100 do init() :/
             */
             ClientInterface ci = (ClientInterface) Naming.lookup("//localhost:" + 2100/*clientsPort*/ + "/" + client);
->>>>>>> origin/master
             ci.deliverMessage(client, message, source);
         } catch (NotBoundException ex) {
             
@@ -82,22 +80,16 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
     
     public SuperPeer( Server userInterface ) throws RemoteException {
         this.userInterface = userInterface;
-<<<<<<< HEAD
     }
     
     public int getClientsPort(){
         return clientsPort;
-=======
->>>>>>> origin/master
     }
     
     // [BASTOS] coloquei o init() aqui pra ser chamado pelo botão 'Iniciar'
     public void start() {
-<<<<<<< HEAD
-=======
         clientList = new ArrayList<>();
->>>>>>> origin/master
-        
+
         boolean cont = true;
         do {
             try {                
@@ -125,13 +117,13 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
             //Port 3000
             try { LocateRegistry.createRegistry(SuperPeer.peerPort); } catch (RemoteException ex) { }
             peerOnlyURL = "//localhost:" + String.valueOf(SuperPeer.peerPort) + "/";
-<<<<<<< HEAD
+
             Naming.rebind(peerOnlyURL + SuperPeer.baseName + String.valueOf(offset), obj);
-=======
+
             
             /*[BASTOS] Não funciona aqui se eu tirar o comment, não cheguei a testar muito. */
             //Naming.rebind(peerOnlyURL + SuperPeer.baseName + String.valueOf(offset), obj);
->>>>>>> origin/master
+
             userInterface.println("//localhost:" + String.valueOf(SuperPeer.peerPort) + "/" + SuperPeer.baseName + String.valueOf(offset));
             userInterface.println("Servidor iniciado.");
             userInterface.setStarted();
