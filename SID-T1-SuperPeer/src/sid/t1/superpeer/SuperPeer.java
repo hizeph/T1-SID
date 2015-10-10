@@ -13,7 +13,8 @@ import sid.t1.pkginterface.ClientInterface;
 import sid.t1.pkginterface.SuperPeerInterface;
 
 public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface {
-
+    
+    Server userInterface;
     ArrayList<ClientInterface> clientList;
     int offset = 0; // PeerNumber
     int clientsPort; // Port to lookup for clients
@@ -27,9 +28,15 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
     */
     @Override
     public void sendMessageClient(String client, String message, String source) throws RemoteException {
-
+        userInterface.println("[ENVIANDO] " + source + " -> " + client + ": " + message );
         try {
-            ClientInterface ci = (ClientInterface) Naming.lookup("//localhost:" + clientsPort + "/" + client);
+            /**
+             * [BASTOS] Fiquei horas tentando descobrir pq clientsPort entra como 0 aqui, mas não consegui :(
+             * Coloquei 2100 direto ali pra poder testar a interface
+             * Ele sai do init() como 2100 mas quando entra aqui tá em 0
+             * Se atribuir um valor pra ele no construtor ele recebe, mas nada do 2100 do init() :/
+            */
+            ClientInterface ci = (ClientInterface) Naming.lookup("//localhost:" + 2100/*clientsPort*/ + "/" + client);
             ci.deliverMessage(client, message, source);
         } catch (NotBoundException ex) {
             
@@ -37,7 +44,7 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
                 String str[] = Naming.list(peerOnlyURL);
                 for (String s : str){
                     SuperPeerInterface peer = (SuperPeerInterface) Naming.lookup(s);
-                    peer.sendMesssagePeer(client, message, source);
+                    peer.sendMessagePeer(client, message, source);
                 }
                  
             } catch (MalformedURLException | NotBoundException ex1) {
@@ -51,9 +58,9 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
     }
     
     @Override
-    public void sendMesssagePeer(String client, String message, String source) throws RemoteException {
+    public void sendMessagePeer(String client, String message, String source) throws RemoteException {
         try {
-            
+            /*Não seria SuperPeerInterface aqui?*/
             ClientInterface ci = (ClientInterface) Naming.lookup("//localhost:" + clientsPort + "/" + client);
             ci.deliverMessage(client, message, source);
             
@@ -62,11 +69,12 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
         }
     }
     
-    public SuperPeer() throws RemoteException {
-        
+    public SuperPeer( Server userInterface ) throws RemoteException {
+        this.userInterface = userInterface;
     }
     
-    public void init() {
+    // [BASTOS] coloquei o init() aqui pra ser chamado pelo botão 'Iniciar'
+    public void start() {
         clientList = new ArrayList<>();
         
         boolean cont = true;
@@ -87,19 +95,39 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
             LocateRegistry.createRegistry(clientsPort);
 
             // PeerX to ClientYY
-            SuperPeer obj = new SuperPeer();            
+            SuperPeer obj = new SuperPeer( userInterface );
             Naming.rebind("//localhost:" + String.valueOf(SuperPeer.port + offset) + "/" + SuperPeer.baseName + String.valueOf(offset), obj);
-            System.out.println("//localhost:" + String.valueOf(SuperPeer.port + offset) + "/" + SuperPeer.baseName + String.valueOf(offset));
+            userInterface.println("//localhost:" + String.valueOf(SuperPeer.port + offset) + "/" + SuperPeer.baseName + String.valueOf(offset));
 
             //Mais um registry exclusivo para peers
             //Isso pra poder encaminhar as mensagens com Naming.list ao inves de salvar numa lista a parte
             //Port 3000
             peerOnlyURL = "//localhost:" + String.valueOf(SuperPeer.peerPort) + "/";
-            Naming.rebind(peerOnlyURL + SuperPeer.baseName + String.valueOf(offset), obj);
-            System.out.println("//localhost:" + String.valueOf(SuperPeer.peerPort) + "/" + SuperPeer.baseName + String.valueOf(offset));
+            
+            /*[BASTOS] Não funciona aqui se eu tirar o comment, não cheguei a testar muito. */
+            //Naming.rebind(peerOnlyURL + SuperPeer.baseName + String.valueOf(offset), obj);
+            userInterface.println("//localhost:" + String.valueOf(SuperPeer.peerPort) + "/" + SuperPeer.baseName + String.valueOf(offset));
+            userInterface.println("Servidor iniciado.");
+            userInterface.setStarted();
             
         } catch (RemoteException | MalformedURLException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    // BUG: unbind não remove o Registry, então o offset volta pro último valor
+    // antes de parar o servidor.
+    public void stop() {
+        try
+        {
+            String fullName = "//localhost:" + String.valueOf(SuperPeer.port + offset) + "/" + SuperPeer.baseName + String.valueOf(offset);
+            Naming.unbind( fullName );
+            offset = 0;
+            userInterface.println("Servidor terminado.");
+            userInterface.setStopped();
+        }
+        catch (NotBoundException | RemoteException | MalformedURLException ex) {
+            Logger.getLogger(SuperPeer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

@@ -21,11 +21,11 @@ public class Client extends javax.swing.JFrame {
     public Client() {
         initComponents();
         try {
-            control = new Control();
-            control.init();
+            control = new Control( this );
         } catch (RemoteException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
+        setDisconnected();
     }
 
     /**
@@ -35,54 +35,182 @@ public class Client extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        clientPanel = new javax.swing.JPanel();
+        buttonSend = new javax.swing.JButton();
+        labelClientID = new javax.swing.JLabel();
+        tfieldClientID = new javax.swing.JTextField();
+        buttonConnect = new javax.swing.JButton();
+        buttonDisconnect = new javax.swing.JButton();
+        spClientOutput = new javax.swing.JScrollPane();
+        tareaOutput = new javax.swing.JTextArea();
+        labelReceiverID = new javax.swing.JLabel();
+        tfieldReceiverID = new javax.swing.JTextField();
+        separator1Client = new javax.swing.JSeparator();
+        labelMessage = new javax.swing.JLabel();
+        tfieldMessage = new javax.swing.JTextField();
+        labelOutput = new javax.swing.JLabel();
+        buttonOutputClear = new javax.swing.JButton();
+        separator2Client = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Teste");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        buttonSend.setText("Enviar");
+        buttonSend.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                buttonSendActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jButton1)
-                .addContainerGap(312, Short.MAX_VALUE))
+        labelClientID.setText("ID do Cliente:");
+
+        tfieldClientID.setText("Paulo");
+
+        buttonConnect.setText("Conectar");
+        buttonConnect.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                buttonConnectActionPerformed(evt);
+            }
+        });
+
+        buttonDisconnect.setText("Desconectar");
+        buttonDisconnect.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                buttonDisconnectActionPerformed(evt);
+            }
+        });
+
+        tareaOutput.setEditable(false);
+        tareaOutput.setColumns(20);
+        tareaOutput.setRows(5);
+        ( ( javax.swing.text.DefaultCaret ) this.tareaOutput.getCaret() ).setUpdatePolicy( javax.swing.text.DefaultCaret.ALWAYS_UPDATE );
+        spClientOutput.setViewportView(tareaOutput);
+
+        labelReceiverID.setText("ID do Receptor:");
+
+        tfieldReceiverID.setText("Paulo");
+
+        labelMessage.setText("Mensagem:");
+
+        tfieldMessage.setText("TestMessage");
+
+        labelOutput.setText("Saída:");
+
+        buttonOutputClear.setText("Limpar");
+        buttonOutputClear.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                buttonOutputClearActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout clientPanelLayout = new javax.swing.GroupLayout(clientPanel);
+        clientPanel.setLayout(clientPanelLayout);
+        clientPanelLayout.setHorizontalGroup(
+            clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clientPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(separator2Client)
+                    .addComponent(separator1Client, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(spClientOutput)
+                    .addGroup(clientPanelLayout.createSequentialGroup()
+                        .addComponent(labelClientID)
+                        .addGap(21, 21, 21)
+                        .addComponent(tfieldClientID, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonConnect)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonDisconnect))
+                    .addGroup(clientPanelLayout.createSequentialGroup()
+                        .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelReceiverID)
+                            .addComponent(labelMessage))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfieldReceiverID)
+                            .addGroup(clientPanelLayout.createSequentialGroup()
+                                .addComponent(tfieldMessage)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonSend))))
+                    .addGroup(clientPanelLayout.createSequentialGroup()
+                        .addComponent(labelOutput)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonOutputClear, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jButton1)
-                .addContainerGap(253, Short.MAX_VALUE))
+        clientPanelLayout.setVerticalGroup(
+            clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, clientPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelClientID)
+                    .addComponent(tfieldClientID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonConnect)
+                    .addComponent(buttonDisconnect))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(separator1Client, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelReceiverID)
+                    .addComponent(tfieldReceiverID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelMessage)
+                    .addComponent(tfieldMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonSend))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(separator2Client, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelOutput)
+                    .addComponent(buttonOutputClear))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(spClientOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(clientPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(clientPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSendActionPerformed
        control.sendMessage();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonSendActionPerformed
+
+    private void buttonConnectActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonConnectActionPerformed
+    {//GEN-HEADEREND:event_buttonConnectActionPerformed
+        control.connect();
+    }//GEN-LAST:event_buttonConnectActionPerformed
+
+    private void buttonDisconnectActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonDisconnectActionPerformed
+    {//GEN-HEADEREND:event_buttonDisconnectActionPerformed
+        control.disconnect();
+    }//GEN-LAST:event_buttonDisconnectActionPerformed
+
+    private void buttonOutputClearActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonOutputClearActionPerformed
+    {//GEN-HEADEREND:event_buttonOutputClearActionPerformed
+        tareaOutput.setText( "" );
+    }//GEN-LAST:event_buttonOutputClearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,7 +250,75 @@ public class Client extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton buttonConnect;
+    private javax.swing.JButton buttonDisconnect;
+    private javax.swing.JButton buttonOutputClear;
+    private javax.swing.JButton buttonSend;
+    private javax.swing.JPanel clientPanel;
+    private javax.swing.JLabel labelClientID;
+    private javax.swing.JLabel labelMessage;
+    private javax.swing.JLabel labelOutput;
+    private javax.swing.JLabel labelReceiverID;
+    private javax.swing.JSeparator separator1Client;
+    private javax.swing.JSeparator separator2Client;
+    private javax.swing.JScrollPane spClientOutput;
+    private javax.swing.JTextArea tareaOutput;
+    private javax.swing.JTextField tfieldClientID;
+    private javax.swing.JTextField tfieldMessage;
+    private javax.swing.JTextField tfieldReceiverID;
     // End of variables declaration//GEN-END:variables
+    
+    // <editor-fold defaultstate="collapsed" desc=" GETs / SETs ">
+    public javax.swing.JTextField getClientID()
+    {
+        return tfieldClientID;
+    }
+    
+    public javax.swing.JTextField getReceiverID()
+    {
+        return tfieldReceiverID;
+    }
+    
+    public javax.swing.JTextField getMessage()
+    {
+        return tfieldMessage;
+    }
+    
+    public javax.swing.JTextArea getOutput()
+    {
+        return tareaOutput;
+    }
+    //</editor-fold>
+    
+    public void setConnected()
+    {
+        tfieldClientID.setEnabled( false );
+        buttonConnect.setEnabled( false );
+        buttonDisconnect.setEnabled( true );
+        tfieldReceiverID.setEnabled( true );
+        tfieldMessage.setEnabled( true );
+        buttonSend.setEnabled( true );
+    }
+    
+    public void setDisconnected()
+    {
+        tfieldClientID.setEnabled( true );
+        buttonConnect.setEnabled( true );
+        buttonDisconnect.setEnabled( false );
+        tfieldReceiverID.setEnabled( false );
+        tfieldMessage.setEnabled( false );
+        buttonSend.setEnabled( false );
+    }
+    
+    // Imprime na área de texto da interface.
+    public void println( String message )
+    {
+        tareaOutput.append( "> " + message + "\n" );
+    }
+    
+    // Mostra uma MessageBox com uma mensagem de erro.
+    public void showError( String message )
+    {
+        javax.swing.JOptionPane.showMessageDialog( this, message, "Error", javax.swing.JOptionPane.ERROR_MESSAGE );
+    }
 }
