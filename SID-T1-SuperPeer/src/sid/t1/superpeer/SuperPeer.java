@@ -17,10 +17,6 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
 
     static int offset = 0; // PeerNumber
     static int clientsPort; // Port to lookup for clients
-
-    int offset = 0; // PeerNumber
-    int clientsPort; // Port to lookup for clients
-
     String peerOnlyURL; // URL to lookup for other peers
     
     /**
@@ -34,10 +30,6 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
         userInterface.println("[ENVIANDO] " + source + " -> " + client + ": " + message );
 
         System.out.println(getClientsPort());
-        try {
-            //Supostamente corrigido, se o offset não bugar também
-            ClientInterface ci = (ClientInterface) Naming.lookup("//localhost:" + getClientsPort() + "/" + client);
-
         try {
             /**
              * [BASTOS] Fiquei horas tentando descobrir pq clientsPort entra como 0 aqui, mas não consegui :(
@@ -88,7 +80,6 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
     
     // [BASTOS] coloquei o init() aqui pra ser chamado pelo botão 'Iniciar'
     public void start() {
-        clientList = new ArrayList<>();
 
         boolean cont = true;
         do {
@@ -133,22 +124,6 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
         }
         
         System.out.println(clientsPort);
-    }
-    
-    // BUG: unbind não remove o Registry, então o offset volta pro último valor
-    // antes de parar o servidor.
-    public void stop() {
-        try
-        {
-            String fullName = "//localhost:" + String.valueOf(SuperPeer.port + offset) + "/" + SuperPeer.baseName + String.valueOf(offset);
-            Naming.unbind( fullName );
-            offset = 0;
-            userInterface.println("Servidor terminado.");
-            userInterface.setStopped();
-        }
-        catch (NotBoundException | RemoteException | MalformedURLException ex) {
-            Logger.getLogger(SuperPeer.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
     // BUG: unbind não remove o Registry, então o offset volta pro último valor
