@@ -10,18 +10,23 @@ import sid.t1.pkginterface.SuperPeerInterface;
 
 public class Control {
     static SuperPeerInterface obj;
-    static String s = "";
     
-    public void start(){
+    public Control(){
         try {
-            obj = (SuperPeerInterface) Naming.lookup("//localhost:2020/TESTE1");
-            s = obj.testIface();
+            
+            obj = (SuperPeerInterface) Naming.lookup("//localhost:2020/Peer1");
+            
+        } catch (NotBoundException | MalformedURLException | RemoteException ex) {
+            Logger.getLogger(Control.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void start() {
+        try {
+            
+            String s = obj.testIface();
             System.out.println("Server: " + s);
             
-        } catch (NotBoundException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RemoteException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }

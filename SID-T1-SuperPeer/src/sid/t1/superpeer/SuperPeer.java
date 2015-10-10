@@ -14,29 +14,31 @@ import sid.t1.pkginterface.SuperPeerInterface;
 
 public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface {
     
-    public SuperPeer() throws RemoteException { 
-    }
     
     /************************************************
     ** Implementar funções aqui *********************
     ** Definições na Interface **********************
     ************************************************/
     
+    public SuperPeer() throws RemoteException {}
+    
+    @Override
     public String testIface() throws RemoteException{
         System.out.println("called");
         return "TESTE 1";
     }
     
-      public static void main(String[] args) {
+    public static void main(String[] args) {
+        
+        try { LocateRegistry.createRegistry(SuperPeer.port); } catch (RemoteException ex) { }
+        
         try {
             
-            LocateRegistry.createRegistry(2020);
             SuperPeer obj = new SuperPeer();
-            Naming.rebind("//localhost:2020/TESTE1", obj);
+            int size = Naming.list("//localhost:"+String.valueOf(SuperPeer.port)+"/").length;            
+            Naming.rebind("//localhost:"+String.valueOf(SuperPeer.port)+"/"+SuperPeer.baseName+String.valueOf(size+1), obj);
             
-        } catch (RemoteException ex) {
-            Logger.getLogger(SuperPeer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MalformedURLException ex) {
+        } catch (RemoteException | MalformedURLException ex) {
             Logger.getLogger(SuperPeer.class.getName()).log(Level.SEVERE, null, ex);
         }
         

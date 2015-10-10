@@ -1,15 +1,15 @@
 package sid.t1.client;
 
-
 public class Client extends javax.swing.JFrame {
     
-    Control control = new Control();
+    Control control;
 
     /**
      * Creates new form NewJFrame
      */
     public Client() {
         initComponents();
+        control = new Control();
     }
 
     /**
