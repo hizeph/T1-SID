@@ -44,7 +44,10 @@ public class Control extends UnicastRemoteObject implements ClientInterface {
             
             // Se registra no Registry de porta 21xx que será lida pelo PeerXX
             endName = userInterface.getClientID().getText();
+<<<<<<< HEAD
             //Se mudar pra 1 funciona se tiver 2 Peer rodando
+=======
+>>>>>>> origin/master
             endNumber = 0;
             String serverFullName = "//localhost:" + String.valueOf(SuperPeerInterface.port + endNumber) + "/" + SuperPeerInterface.baseName + endNumber;
             superPeer = (SuperPeerInterface) Naming.lookup(serverFullName);
