@@ -5,6 +5,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import sid.t1.pkginterface.ClientInterface;
@@ -44,10 +45,12 @@ public class Control extends UnicastRemoteObject implements ClientInterface {
             
             // Se registra no Registry de porta 21xx que será lida pelo PeerXX
             endName = userInterface.getClientID().getText();
-
+            
+            
+            String peers[] = Naming.list("//localhost:"+SuperPeerInterface.peerPort+"/");
             //Se mudar pra 1 funciona se tiver 2 Peer rodando
-
-            endNumber = 0;
+            Random rn = new Random();
+            endNumber = rn.nextInt() % peers.length;
             String serverFullName = "//localhost:" + String.valueOf(SuperPeerInterface.port + endNumber) + "/" + SuperPeerInterface.baseName + endNumber;
             superPeer = (SuperPeerInterface) Naming.lookup(serverFullName);
             

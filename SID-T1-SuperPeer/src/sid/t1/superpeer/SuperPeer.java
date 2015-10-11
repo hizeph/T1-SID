@@ -17,26 +17,14 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
 
     static int offset = 0; // PeerNumber
     static int clientsPort; // Port to lookup for clients
-    String peerOnlyURL; // URL to lookup for other peers
+    static String peerOnlyURL; // URL to lookup for other peers
     
-    /**
-    ***********************************************
-    ** Implementar funções aqui *******************
-    ** Definições na Interface ********************
-    ***********************************************
-    */
     @Override
     public void sendMessageClient(String client, String message, String source) throws RemoteException {
         userInterface.println("[ENVIANDO] " + source + " -> " + client + ": " + message );
 
         System.out.println(getClientsPort());
         try {
-            /**
-             * [BASTOS] Fiquei horas tentando descobrir pq clientsPort entra como 0 aqui, mas não consegui :(
-             * Coloquei 2100 direto ali pra poder testar a interface
-             * Ele sai do init() como 2100 mas quando entra aqui tá em 0
-             * Se atribuir um valor pra ele no construtor ele recebe, mas nada do 2100 do init() :/
-            */
             ClientInterface ci = (ClientInterface) Naming.lookup("//localhost:" + 2100/*clientsPort*/ + "/" + client);
             ci.deliverMessage(client, message, source);
         } catch (NotBoundException ex) {
@@ -61,7 +49,6 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
     @Override
     public void sendMessagePeer(String client, String message, String source) throws RemoteException {
         try {
-            /*Não seria SuperPeerInterface aqui?*/
             ClientInterface ci = (ClientInterface) Naming.lookup("//localhost:" + clientsPort + "/" + client);
             ci.deliverMessage(client, message, source);
             
