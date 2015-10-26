@@ -22,15 +22,17 @@ public interface SuperPeerInterface extends Remote {
     * @param client Destination client name
     * @param message Message to deliver
     * @param source Client who wants to send a message
+    * @return True if message has been delivered
     * @throws java.rmi.RemoteException
     */
-    public void sendMessageClient(String client, String message, String source) throws RemoteException;
+    public boolean sendMessageClient(String client, String message, String source) throws RemoteException;
     
     /**
     * @param client Destination client name
     * @param message Message to deliver
     * @param source Client who wants to send a message
+    * @return True if message has been delivered
     * @throws java.rmi.RemoteException
     */
-    public void sendMessagePeer(String client, String message, String source) throws RemoteException;
+    public boolean sendMessagePeer(String client, String message, String source) throws RemoteException;
 }

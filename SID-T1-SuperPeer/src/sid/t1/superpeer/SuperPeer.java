@@ -20,20 +20,23 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
     static String peerOnlyURL; // URL to lookup for other peers
     
     @Override
-    public void sendMessageClient(String client, String message, String source) throws RemoteException {
+    public boolean sendMessageClient(String client, String message, String source) throws RemoteException {
         userInterface.println("[ENVIANDO] " + source + " -> " + client + ": " + message );
 
         System.out.println(getClientsPort());
         try {
-            ClientInterface ci = (ClientInterface) Naming.lookup("//localhost:" + 2100/*clientsPort*/ + "/" + client);
+            ClientInterface ci = (ClientInterface) Naming.lookup("//localhost:" + getClientsPort() + "/" + client);
             ci.deliverMessage(client, message, source);
+            return true;
         } catch (NotBoundException ex) {
             
             try {
                 String str[] = Naming.list(peerOnlyURL);
                 for (String s : str){
                     SuperPeerInterface peer = (SuperPeerInterface) Naming.lookup(s);
-                    peer.sendMessagePeer(client, message, source);
+                    if (peer.sendMessagePeer(client, message, source)){
+                        return true;
+                    }
                 }
                  
             } catch (MalformedURLException | NotBoundException ex1) {
@@ -43,17 +46,18 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
         } catch (MalformedURLException ex) {
             Logger.getLogger(SuperPeer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        return false;
     }
     
     @Override
-    public void sendMessagePeer(String client, String message, String source) throws RemoteException {
+    public boolean sendMessagePeer(String client, String message, String source) throws RemoteException {
         try {
             ClientInterface ci = (ClientInterface) Naming.lookup("//localhost:" + clientsPort + "/" + client);
             ci.deliverMessage(client, message, source);
+            return true;
             
         } catch (NotBoundException | MalformedURLException ex) {
-            
+            return false;
         }
     }
     

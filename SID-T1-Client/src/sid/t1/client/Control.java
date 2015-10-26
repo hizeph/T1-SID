@@ -28,7 +28,7 @@ public class Control extends UnicastRemoteObject implements ClientInterface {
 
     @Override
     public void deliverMessage(String client, String message, String source) throws RemoteException {
-        userInterface.println("De '" + source + "' Para '" + client + "': " + message);
+        userInterface.println("Recebido de " + source + ": " + message);
     }
 
     public Control(Client userInterface) throws RemoteException {
@@ -36,9 +36,13 @@ public class Control extends UnicastRemoteObject implements ClientInterface {
     }
 
     public void connect() {
-        endName = userInterface.getClientID().getText();
-        fullName = "//localhost:" + String.valueOf(ClientInterface.port + endNumber) + "/" + ClientInterface.baseName + endName;
         try {
+            String peers[] = Naming.list("//localhost:" + SuperPeerInterface.peerPort + "/");
+            Random rn = new Random();
+            endNumber = rn.nextInt(peers.length);
+            endName = userInterface.getClientID().getText();
+            fullName = "//localhost:" + String.valueOf(ClientInterface.port + endNumber) + "/" + ClientInterface.baseName + endName;
+        
             Naming.lookup(fullName);
             //already exists
             JOptionPane.showMessageDialog(userInterface, "Username Already Bound!");
@@ -48,13 +52,13 @@ public class Control extends UnicastRemoteObject implements ClientInterface {
                 Naming.rebind(fullName, this);
                 userInterface.println(fullName);
                 userInterface.println(endName + " conectado.");
-                userInterface.setConnected();
 
-                String peers[] = Naming.list("//localhost:" + SuperPeerInterface.peerPort + "/");
-                Random rn = new Random();
-                endNumber = rn.nextInt() % peers.length;
+                
                 String serverFullName = "//localhost:" + String.valueOf(SuperPeerInterface.port + endNumber) + "/" + SuperPeerInterface.baseName + endNumber;
                 superPeer = (SuperPeerInterface) Naming.lookup(serverFullName);
+                userInterface.println("Conectado ao peer: " + serverFullName);
+                
+                userInterface.setConnected();
                 
             } catch (RemoteException | MalformedURLException | NotBoundException ex1) {
                 Logger.getLogger(Control.class.getName()).log(Level.SEVERE, null, ex1);
@@ -81,8 +85,14 @@ public class Control extends UnicastRemoteObject implements ClientInterface {
             String message = userInterface.getMessage().getText();
             String receiver = ClientInterface.baseName + userInterface.getReceiverID().getText();
 
-            superPeer.sendMessageClient(receiver, message, clientName);
-
+            boolean delivered = superPeer.sendMessageClient(receiver, message, clientName);
+            
+            if (delivered){
+                userInterface.println("Mensagem entregue para: " + receiver);
+            } else {
+                userInterface.println("Cliente " + receiver + " não disponível");
+            }
+            
             //userInterface.getMessage().setText( "" ); // LIMPA A CAIXA DA MENSAGEM DEPOIS DE ENVIAR
         } catch (RemoteException ex) {
             Logger.getLogger(Control.class.getName()).log(Level.SEVERE, null, ex);

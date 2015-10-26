@@ -35,8 +35,7 @@ public class Client extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         clientPanel = new javax.swing.JPanel();
         buttonSend = new javax.swing.JButton();
@@ -58,10 +57,8 @@ public class Client extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         buttonSend.setText("Enviar");
-        buttonSend.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSendActionPerformed(evt);
             }
         });
@@ -71,19 +68,15 @@ public class Client extends javax.swing.JFrame {
         tfieldClientID.setText("Paulo");
 
         buttonConnect.setText("Conectar");
-        buttonConnect.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonConnectActionPerformed(evt);
             }
         });
 
         buttonDisconnect.setText("Desconectar");
-        buttonDisconnect.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonDisconnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDisconnectActionPerformed(evt);
             }
         });
@@ -105,10 +98,8 @@ public class Client extends javax.swing.JFrame {
         labelOutput.setText("Saída:");
 
         buttonOutputClear.setText("Limpar");
-        buttonOutputClear.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonOutputClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOutputClearActionPerformed(evt);
             }
         });
