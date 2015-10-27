@@ -41,17 +41,14 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="separator2Client" max="32767" attributes="0"/>
-                      <Component id="separator1Client" alignment="1" max="32767" attributes="0"/>
-                      <Component id="spClientOutput" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="labelClientID" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
-                          <Component id="tfieldClientID" pref="142" max="32767" attributes="0"/>
+                          <Component id="tfieldClientID" pref="101" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="buttonConnect" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="buttonDisconnect" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonDisconnect" min="-2" pref="93" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -60,18 +57,31 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="tfieldReceiverID" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="tfieldMessage" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="buttonSend" min="-2" max="-2" attributes="0"/>
+                                  <Component id="buttonSend" min="-2" pref="63" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="tfieldReceiverID" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="labelOutput" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="buttonOutputClear" min="-2" pref="113" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="spClientOutput" alignment="0" max="32767" attributes="0"/>
+                      <Component id="separator1Client" max="32767" attributes="0"/>
+                      <Component id="separator2Client" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="168" max="-2" attributes="0"/>
+                      <Component id="labelFriends" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="buttonAdd" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="buttonRemove" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -80,37 +90,50 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labelClientID" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfieldClientID" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="buttonConnect" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="buttonDisconnect" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelFriends" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="separator1Client" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labelReceiverID" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfieldReceiverID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="separator1Client" min="-2" pref="10" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="labelReceiverID" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfieldReceiverID" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="labelMessage" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfieldMessage" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonSend" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="separator2Client" min="-2" pref="10" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="labelOutput" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonOutputClear" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="spClientOutput" pref="164" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="buttonAdd" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonRemove" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labelMessage" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfieldMessage" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="buttonSend" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="separator2Client" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labelOutput" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="buttonOutputClear" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="spClientOutput" min="-2" pref="164" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -205,6 +228,44 @@
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="separator2Client">
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JList" name="jlistFriends">
+              <Properties>
+                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+                <Property name="selectionMode" type="int" value="0"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="labelFriends">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Amigos:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="buttonAdd">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Adicionar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="buttonRemove">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Remover"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonRemoveActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

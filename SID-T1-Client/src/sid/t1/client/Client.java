@@ -3,6 +3,7 @@ package sid.t1.client;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
 Definição número das portas
@@ -35,7 +36,8 @@ public class Client extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         clientPanel = new javax.swing.JPanel();
         buttonSend = new javax.swing.JButton();
@@ -53,12 +55,19 @@ public class Client extends javax.swing.JFrame {
         labelOutput = new javax.swing.JLabel();
         buttonOutputClear = new javax.swing.JButton();
         separator2Client = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jlistFriends = new javax.swing.JList();
+        labelFriends = new javax.swing.JLabel();
+        buttonAdd = new javax.swing.JButton();
+        buttonRemove = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         buttonSend.setText("Enviar");
-        buttonSend.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonSend.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonSendActionPerformed(evt);
             }
         });
@@ -68,15 +77,19 @@ public class Client extends javax.swing.JFrame {
         tfieldClientID.setText("Paulo");
 
         buttonConnect.setText("Conectar");
-        buttonConnect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonConnect.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonConnectActionPerformed(evt);
             }
         });
 
         buttonDisconnect.setText("Desconectar");
-        buttonDisconnect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonDisconnect.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonDisconnectActionPerformed(evt);
             }
         });
@@ -98,9 +111,34 @@ public class Client extends javax.swing.JFrame {
         labelOutput.setText("Saída:");
 
         buttonOutputClear.setText("Limpar");
-        buttonOutputClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonOutputClear.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonOutputClearActionPerformed(evt);
+            }
+        });
+
+        jlistFriends.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jlistFriends);
+
+        labelFriends.setText("Amigos:");
+
+        buttonAdd.setText("Adicionar");
+        buttonAdd.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                buttonAddActionPerformed(evt);
+            }
+        });
+
+        buttonRemove.setText("Remover");
+        buttonRemove.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                buttonRemoveActionPerformed(evt);
             }
         });
 
@@ -111,63 +149,80 @@ public class Client extends javax.swing.JFrame {
             .addGroup(clientPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(separator2Client)
-                    .addComponent(separator1Client, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(spClientOutput)
                     .addGroup(clientPanelLayout.createSequentialGroup()
                         .addComponent(labelClientID)
                         .addGap(21, 21, 21)
-                        .addComponent(tfieldClientID, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                        .addComponent(tfieldClientID, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonConnect)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonDisconnect))
+                        .addComponent(buttonDisconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(clientPanelLayout.createSequentialGroup()
                         .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelReceiverID)
                             .addComponent(labelMessage))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfieldReceiverID)
                             .addGroup(clientPanelLayout.createSequentialGroup()
                                 .addComponent(tfieldMessage)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonSend))))
+                                .addComponent(buttonSend, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfieldReceiverID)))
                     .addGroup(clientPanelLayout.createSequentialGroup()
                         .addComponent(labelOutput)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonOutputClear, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(buttonOutputClear, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spClientOutput)
+                    .addComponent(separator1Client)
+                    .addComponent(separator2Client))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelFriends)
+                    .addGroup(clientPanelLayout.createSequentialGroup()
+                        .addComponent(buttonAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonRemove)))
                 .addContainerGap())
         );
         clientPanelLayout.setVerticalGroup(
             clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, clientPanelLayout.createSequentialGroup()
+            .addGroup(clientPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelClientID)
                     .addComponent(tfieldClientID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonConnect)
-                    .addComponent(buttonDisconnect))
+                    .addComponent(buttonDisconnect)
+                    .addComponent(labelFriends))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(separator1Client, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelReceiverID)
-                    .addComponent(tfieldReceiverID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelMessage)
-                    .addComponent(tfieldMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonSend))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(separator2Client, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelOutput)
-                    .addComponent(buttonOutputClear))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spClientOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(clientPanelLayout.createSequentialGroup()
+                        .addComponent(separator1Client, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelReceiverID)
+                            .addComponent(tfieldReceiverID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelMessage)
+                            .addComponent(tfieldMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonSend))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(separator2Client, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelOutput)
+                            .addComponent(buttonOutputClear))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spClientOutput, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
+                    .addGroup(clientPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(clientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonAdd)
+                            .addComponent(buttonRemove))))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -202,6 +257,19 @@ public class Client extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_buttonOutputClearActionPerformed
         tareaOutput.setText( "" );
     }//GEN-LAST:event_buttonOutputClearActionPerformed
+
+    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonAddActionPerformed
+    {//GEN-HEADEREND:event_buttonAddActionPerformed
+        String name = JOptionPane.showInputDialog("Digite o ID do seu amigo:");
+        if(name != null && !name.isEmpty()) {
+            control.addFriend(name);
+        }
+    }//GEN-LAST:event_buttonAddActionPerformed
+
+    private void buttonRemoveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonRemoveActionPerformed
+    {//GEN-HEADEREND:event_buttonRemoveActionPerformed
+        control.removeFriend();
+    }//GEN-LAST:event_buttonRemoveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,12 +309,17 @@ public class Client extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonConnect;
     private javax.swing.JButton buttonDisconnect;
     private javax.swing.JButton buttonOutputClear;
+    private javax.swing.JButton buttonRemove;
     private javax.swing.JButton buttonSend;
     private javax.swing.JPanel clientPanel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList jlistFriends;
     private javax.swing.JLabel labelClientID;
+    private javax.swing.JLabel labelFriends;
     private javax.swing.JLabel labelMessage;
     private javax.swing.JLabel labelOutput;
     private javax.swing.JLabel labelReceiverID;
@@ -279,6 +352,11 @@ public class Client extends javax.swing.JFrame {
     {
         return tareaOutput;
     }
+    
+    public javax.swing.JList getFriends()
+    {
+        return jlistFriends;
+    }
     //</editor-fold>
     
     public void setConnected()
@@ -289,6 +367,9 @@ public class Client extends javax.swing.JFrame {
         tfieldReceiverID.setEnabled( true );
         tfieldMessage.setEnabled( true );
         buttonSend.setEnabled( true );
+        jlistFriends.setEnabled( true );
+        buttonAdd.setEnabled( true);
+        buttonRemove.setEnabled( true );
     }
     
     public void setDisconnected()
@@ -299,6 +380,9 @@ public class Client extends javax.swing.JFrame {
         tfieldReceiverID.setEnabled( false );
         tfieldMessage.setEnabled( false );
         buttonSend.setEnabled( false );
+        jlistFriends.setEnabled( false );
+        buttonAdd.setEnabled( false );
+        buttonRemove.setEnabled( false );
     }
     
     // Imprime na área de texto da interface.

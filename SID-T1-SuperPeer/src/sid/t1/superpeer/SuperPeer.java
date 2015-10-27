@@ -21,7 +21,12 @@ public class SuperPeer extends UnicastRemoteObject implements SuperPeerInterface
     
     @Override
     public boolean sendMessageClient(String client, String message, String source) throws RemoteException {
-        userInterface.println("[ENVIANDO] " + source + " -> " + client + ": " + message );
+        if(message != null) {
+            userInterface.println("[ENVIANDO] " + source + " -> " + client + ": " + message );
+        }
+        else {
+            userInterface.println("[CHECANDO STATUS] -> " + client );
+        }
 
         System.out.println(getClientsPort());
         try {
